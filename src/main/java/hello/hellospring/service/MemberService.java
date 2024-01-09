@@ -1,18 +1,20 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
-import hello.hellospring.domain.repository.MemberRepository;
-import hello.hellospring.domain.repository.MemoryMemberRepository;
+import hello.hellospring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Transactional//JPA를 사용하려면 항상 transaction이 있어야함, 데이터를 저장하거나 변경할땐 항상 있어야함, join(회원가입)할때 사용
+@Service
 public class MemberService {
 
     private final MemberRepository memberRepository;
-
+@Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
@@ -21,10 +23,18 @@ public class MemberService {
      * 회원 가입
      */
     public Long join(Member member) {
-        validateDuplicateMember(member);//중복 회원 검증
-        memberRepository.save(member);
-        return  member.getId();
 
+//        long start = System.currentTimeMillis(); //시간찍는 로직, 이하 주석처리까지
+
+//        try{
+            validateDuplicateMember(member);//중복 회원 검증
+            memberRepository.save(member);
+            return  member.getId();
+//        } finally {
+//            long finish = System.currentTimeMillis();
+//            long timeMs = finish - start;
+//            System.out.println("join = " + timeMs + "ms");
+//        }
     }
 
     private void validateDuplicateMember(Member member) {
@@ -38,7 +48,15 @@ public class MemberService {
      * 전체 회원 조회
      */
     public List<Member> findMembers(){
-        return memberRepository.findAll();
+//        long start = System.currentTimeMillis();
+//        try{
+            return memberRepository.findAll();
+//        }finally {
+//            long finish = System.currentTimeMillis();
+//            long timeMs = finish - start;
+//            System.out.println("findMembers " + timeMs + "ms");
+//        }
+
     }
 
     public Optional<Member> findOne(Long memberId){

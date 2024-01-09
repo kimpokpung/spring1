@@ -18,6 +18,9 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+//    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'//이 라이브러리를 받으면 SpringBoot가 자동으로 JPA에서 사용하는 엔티티매니저를 생성해줌(현재 사용중인 db와 연결, property에서 세팅한 정보, 데이터 소스 등 까지 다 해서), 그러면 그 만들어진것을 인젝션(주입) 받으면 됨
+    runtimeOnly 'com.h2database:h2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
