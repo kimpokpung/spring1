@@ -20,12 +20,12 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @GetMapping("/members/new")
+    @GetMapping("/members/new")//보통 조회할땐 get을 씀
     public String createForm() {
         return "members/createMemberForm";
     }
 
-    @PostMapping("/members/new")
+    @PostMapping("/members/new")//뭔가 데이터를 넘겨 받을 땐 post를 씀
     public String create(MemberForm form) {
         Member member = new Member();
         member.setName(form.getName());

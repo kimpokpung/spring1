@@ -12,8 +12,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="member : ${members}">
-                <td th:text="${member.id}"></td>
+            <tr th:each="member : ${members}">//${members}로 꺼내와서 member : 의 member에 담고
+                <td th:text="${member.id}"></td>//member.해서 사용
                 <td th:text="${member.name}"></td>
             </tr>
             </tbody>
